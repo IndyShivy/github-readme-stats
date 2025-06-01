@@ -199,11 +199,14 @@ const getStyles = ({
  * @param {Partial<StatCardOptions>} options The card options.
  * @returns {string} The stats card SVG object.
  */
+
+//modified renderStatsCard to separate totalCommits and totalCommitsYear
 const renderStatsCard = (stats, options = {}) => {
   const {
     name,
     totalStars,
     totalCommits,
+    totalCommitsYear,
     totalIssues,
     totalPRs,
     totalPRsMerged,
@@ -279,6 +282,17 @@ const renderStatsCard = (stats, options = {}) => {
     value: totalCommits,
     id: "commits",
   };
+  // If include_all_commits is true, we add a separate stat for 2025 commits
+  if (include_all_commits) {
+    STATS.commits_2025 = {
+      icon: icons.commits, // Use the same icon or a different one
+      label: `${i18n.t("statcard.commits")}${
+        include_all_commits ? ` (${new Date().getFullYear()})` : ""
+      }`,
+      value: totalCommitsYear, // No value needed for this stat
+      id: "commits_2025",
+    };
+  }
   STATS.prs = {
     icon: icons.prs,
     label: i18n.t("statcard.prs"),
