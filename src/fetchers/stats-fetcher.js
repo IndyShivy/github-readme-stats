@@ -238,6 +238,7 @@ const fetchStats = async (
     mergedPRsPercentage: 0,
     totalReviews: 0,
     totalCommits: 0,
+    totalCommitsYear: 0,
     totalIssues: 0,
     totalStars: 0,
     totalDiscussionsStarted: 0,
@@ -278,9 +279,11 @@ const fetchStats = async (
 
   stats.name = user.name || user.login;
 
-  // if include_all_commits, fetch all commits using the REST API.
+  // if include_all_commits, fetch all commits using the REST API. if totalCommits is included, then add total and current year commits as two separate values.
   if (include_all_commits) {
     stats.totalCommits = await totalCommitsFetcher(username);
+    stats.totalCommitsYear =
+      user.contributionsCollection.totalCommitContributions;
   } else {
     stats.totalCommits = user.contributionsCollection.totalCommitContributions;
   }

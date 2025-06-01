@@ -108,3 +108,12 @@ People _love_ thorough bug reports. I'm not even kidding.
 -   A quick idea summary
 -   What & why do you want to add the specific feature
 -   Additional context like images, links to resources to implement the feature, etc.
+
+## My Changes
+[stats-card.js](./src/cards/stats-card.js) - Added lines 285-295 to support showing total commits for the user along with total commits for the year.
+To use this feature, you need to add the query parameter &include_all_commits=true to the URL of the stats card.
+
+[stats-fetcher.js](./src/fetchers/stats-fetcher.js) - Added lines 242, 282, 285. This is to store the values of total commits for the user along with the year when query parameter &include_all_commits=true.
+
+
+```javascript
